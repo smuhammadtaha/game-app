@@ -1,0 +1,96 @@
+.btns {
+  text-align: center;
+  margin: auto;
+  width: 40%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1rem;
+}
+button {
+  margin: 1% 1% 0 1%;
+  width: 80px;
+  background-color: black;
+  color: white;
+  border: none;
+  outline: none;
+}
+.reactjs-coverflow_Main {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.reactjs-coverflow_Coverflow {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-perspective: 500px;
+  perspective: 500px;
+}
+
+.reactjs-coverflow_Element {
+  position: relative;
+  -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.6), rgba(
+          0,
+          0,
+          0,
+          0.1
+        )
+        20%, transparent 30%, transparent);
+  margin: auto 20px;
+  transition: transform 0.7s;
+}
+
+.carousel-container {
+}
+.carousel-title {
+  text-align: center;
+  padding: 1rem 0 2rem 0;
+}
+
+.center {
+  animation: center-animate 0.9s ease-out infinite alternate;
+}
+
+.right {
+  animation: right-animate 0.3s ease-out infinite alternate;
+}
+
+@keyframes right-animate {
+  0% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+@keyframes center-animate {
+  0% {
+    transform: scaleX(1.07) scaleY(1.07);
+  }
+  100% {
+    transform: scaleX(1) scaleY(1);
+  }
+}
+
+.coverflow__figure__3bk_C > div > .middle {
+}
+.previous-btn {
+  transform: rotate(0.41turn);
+}
+.next-btn {
+  transform: rotate(0.585turn);
+}
+.purple-btn {
+  height: 10px;
+}
+.coverflow__stage__14oqC {
+  margin-left: 1.8rem;
+}
+
+.coverflow__stage__14oqC {
+margin-left: -55px;
+}
