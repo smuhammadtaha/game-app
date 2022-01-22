@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import purpleTriangle from '../../assets/purple-triangle.png'
 import Cards from '../../data/cards-1.json'
 var React = require("react");
@@ -16,24 +16,50 @@ const Carousel = () => {
     activeImg < Cards.cards.length - 1 && setActiveImg(activeImg + 1);
   }
 
-  const Droppable = (e) =>{
-    console.log('Drag', e.target.currentSrc);
+ 
+  const dragNode = useRef();
+
+  const handleDragStart = (e) =>{
+      console.log('drag Start..')
+      dragNode.current = e.target.currentSrc;
+      }
+  
+
+
+  const handleDragEnd = (e) => {
+    console.log('image path',dragNode)
     if(chosenImages.length < 6){
-      setChosenImages(prev => [...prev,e.target.currentSrc])
+      setChosenImages(prev => [...prev,dragNode.current])
     }
     else{
       return;
     }
+
+  }
+
+  const DoubleClickDelete = (item) => {
+      console.log(item);
+      setChosenImages((prev) => prev.filter((_,i) =>i !== item));
+      if(chosenImages.length == 6){
+        setPlaceholderMap((prev)=> [...prev,item])
+      }
+      else if (chosenImages.length < 6){
+        setPlaceholderMap((prev)=> [...prev,item])
+        setPlaceholderMap((prev)=> [...prev,item])
+      }
   }
 
   let [placeholderMap,setPlaceholderMap] = useState([1,2,3,4,5,6])
+  console.log(placeholderMap)
 
   useEffect(()=>{
+    
     if(placeholderMap.length >= 1){
       placeholderMap.length -=1
     }
   },[chosenImages])
 
+  console.log(chosenImages)
 
   return (
     <div className="carousel">
@@ -83,7 +109,7 @@ const Carousel = () => {
                   }}
                   src={img.url}
                   draggable
-                  onDragEnter={Droppable}
+                  onDragStart={(e) => (handleDragStart(e,(index)))}
                 />
               </div>
               ) : (
@@ -119,7 +145,8 @@ const Carousel = () => {
         {chosenImages.map((i,e) => {
           return (
               <>
-            <div key={e}
+            <div
+            key={e}
               className={!i ? "center" : ""}
               style={{
                 width: "100px",
@@ -132,6 +159,7 @@ const Carousel = () => {
                 objectFit: "cover",
                 backgroundImage: `url(${i})`,
               }}
+              onDoubleClick={() => DoubleClickDelete(e)}
               >
               
             </div>
@@ -155,7 +183,10 @@ const Carousel = () => {
               backgroundSize: "contain",
               objectFit: "cover",
               backgroundImage: ``,
+              
             }}
+            onDragLeave={handleDragEnd}
+            
           >
          </div>
            )
